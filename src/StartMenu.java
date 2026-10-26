@@ -50,6 +50,7 @@ public class StartMenu {
 
     public void openRules(){
         Rules.printRules();
+        display();
     }
     
     public void openTutorial(){
