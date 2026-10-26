@@ -7,19 +7,17 @@ public class OceanGrid extends Grid {
         Cell cell = getCellAtCoordinate(cd);
         CellState state = cell.getState();
         switch (state) {
-            case CellState.EMPTY:
-                cell.setState(CellState.MISS);
-                return ShotResult.MISS;
             case CellState.OCCUPIED:
                 cell.setState(CellState.HIT);
                 Ship shipAtCell = cell.getShip();
                 shipAtCell.addHit(cd);
                 if (shipAtCell.isSunk()) {
-                    return ShotResult.SUNK;
+                    return new ShotResult(ShotOutcome.SUNK, cd);
                 }
-                return ShotResult.HIT;
+                return new ShotResult(ShotOutcome.HIT, cd);
             default:
-                return ShotResult.MISS;
+                cell.setState(CellState.MISS);
+                return new ShotResult(ShotOutcome.MISS, cd);
         }
     }
 
