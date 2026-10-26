@@ -49,7 +49,7 @@ public class StartMenu {
     }                       
 
     public void openRules(){
-        rules.display();
+        rules.printRules();
         display();
     }
     
