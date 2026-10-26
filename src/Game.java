@@ -8,6 +8,7 @@ public class Game {
     }
 
     public void play() {
-        // Implement the game play logic here
+        System.out.println("Player 1's Ocean Grid:");
+        p1.getOceanGrid().display();
     }
 }
