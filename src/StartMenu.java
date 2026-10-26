@@ -24,7 +24,7 @@ public class StartMenu {
             selection = selection.toLowerCase().trim();
             if (selection.equals("p") || selection.equals("play")){
                 deciding= false;
-                play();
+                new GameConfig().start();
             }
             else if (selection.equals("r") || selection.equals("rules")){
                 deciding= false;
@@ -40,24 +40,6 @@ public class StartMenu {
             }
         }
     }                       
-    
-    public void play(){
-        System.out.println("                Would you like to resume a previous save game or make a new game?");
-        System.out.println("                                     (N)ew Game - (L)oad Game");
-        deciding=true;
-        while(deciding){
-            selection = ConsoleHelper.getInput("");
-            selection = selection.toLowerCase().trim();
-            if (selection.equals("n") || selection.equals("new") || selection.equals("new game|")){
-                deciding= false;
-                new GameConfig().start();
-            }
-            else if (selection.equals("l") || selection.equals("load") || selection.equals("load game")){
-                deciding= false;
-                new GameConfig().start();
-            }
-        }
-    }
 
     public void openRules(){
         rules.display();

@@ -15,4 +15,16 @@ public class Player {
     public void setShipFactory(ShipFactory sf) {
         this.sf = sf;
     }
+
+    public TargetGrid getTargetGrid() {
+        return tg;
+    }
+
+    public OceanGrid getOceanGrid() {
+        return og;
+    }
+
+    public ShipFactory getShipFactory() {
+        return sf;
+    }
 }

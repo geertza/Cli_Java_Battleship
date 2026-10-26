@@ -11,10 +11,15 @@ public class GameConfig {
 
         GetSelection("n", "l");
 
+<<<<<<< HEAD
         System.out.println("                Would you like to play a 2 player game or battle against the computer?");
         System.out.println("                                     2 (P)layer - (C)omputer");
+=======
+        System.out.println("                Would you like to play a 2 player game or 1 player game?");
+        System.out.println("                                    (2) Player - (1) Computer");
+>>>>>>> 3f6f2c66f30641a27fd7dfd1016c4dde295a5973
 
-        GetSelection("p", "c");
+        GetSelection("2", "1");
 
         System.out.println("                                    What is your name Player 1?");
         String name = con.getInput("");
@@ -47,7 +52,7 @@ public class GameConfig {
             if (selection.equals(option1)){
                 if (option1.equals("n")){
                     System.out.println("Starting a new game...");
-                } else if (option1.equals("p")){
+                } else if (option1.equals("2")){
                     System.out.println("Starting a 2 player game...");
                     p2 = new HumanPlayer();
                 } else if (option1.equals("m")){
@@ -63,8 +68,8 @@ public class GameConfig {
                 if (option2.equals("l")){
                     System.out.println("This is where a previous save game would be loaded.");
                     continue;
-                } else if (option2.equals("c")){
-                    System.out.println("Starting a game against the computer...");
+                } else if (option2.equals("1")){
+                    System.out.println("Starting a 1 player game...");
                     p2 = new AIPlayer();
                 } else if (option2.equals("a")){
                     System.out.println("Automatic ship placement selected for player 1.");
