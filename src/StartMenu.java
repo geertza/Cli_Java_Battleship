@@ -21,6 +21,10 @@ public class StartMenu {
         System.out.println("                              (P)lay - (R)ules - (T)utorial - (Q)uit");
         while(deciding){
             selection = ConsoleHelper.getInput("");
+            if (selection == null) {
+                System.out.println("You didn't enter anything. Please make a selection.");
+                return;
+            }
             selection = selection.toLowerCase().trim();
             if (selection.equals("p") || selection.equals("play")){
                 deciding= false;
@@ -37,6 +41,9 @@ public class StartMenu {
             else if (selection.equals("q") || selection.equals("quit")){
                 deciding= false;
                 quit();
+            }
+            else {
+                System.out.println("Invalid selection. Please choose Play, Rules, Tutorial, or Quit.");
             }
         }
     }                       
