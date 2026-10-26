@@ -9,7 +9,6 @@ public class Tutorial{
         
         System.out.println("This is a placeholder for the future Tutorial.\n\nPlease press enter to return to previous screen");
 
-        ConsoleHelper.getInput("");
-
+            ConsoleHelper.getInput("");
     }
 }

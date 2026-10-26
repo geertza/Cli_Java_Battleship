@@ -10,8 +10,8 @@ public class GameConfig {
 
         GetSelection("n", "l");
 
-        System.out.println("                Would you like to play a 2 player game or 1 player game?");
-        System.out.println("                                    (2) Player - (1) Computer");
+        System.out.println("                Would you like to play a 2 player game or battle against the computer?");
+        System.out.println("                                     2 (P)layer - (C)omputer");
 
         GetSelection("2", "1");
 
@@ -25,12 +25,12 @@ public class GameConfig {
             p2.setName(name2);
         }
 
-        System.out.printf("                \nHey %s, would you like to play with manual or automatic ship placement?\n", p1.getName());
+        System.out.printf("\n                 Hey %s, would you like to play with manual or automatic ship placement?\n", p1.getName());
         System.out.println("                                    (M)anual - (A)utomatic");
         GetSelection("m", "a");
 
         if (p2 instanceof HumanPlayer) {
-            System.out.printf("                \nHey %s, would you like to play with manual or automatic ship placement?\n", p2.getName());
+            System.out.printf("\n                 Hey %s, would you like to play with manual or automatic ship placement?\n", p2.getName());
             System.out.println("                                    (M)anual - (A)utomatic");
             GetSelection("a", "m"); // flip the order of options to make to get the selection for player 2
         }
