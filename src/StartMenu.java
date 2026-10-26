@@ -54,7 +54,7 @@ public class StartMenu {
             }
             else if (selection.equals("l") || selection.equals("load") || selection.equals("load game")){
                 deciding= false;
-                new GameConfig().load();
+                new GameConfig().start();
             }
         }
     }
