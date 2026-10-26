@@ -11,13 +11,8 @@ public class GameConfig {
 
         GetSelection("n", "l");
 
-<<<<<<< HEAD
         System.out.println("                Would you like to play a 2 player game or battle against the computer?");
         System.out.println("                                     2 (P)layer - (C)omputer");
-=======
-        System.out.println("                Would you like to play a 2 player game or 1 player game?");
-        System.out.println("                                    (2) Player - (1) Computer");
->>>>>>> 3f6f2c66f30641a27fd7dfd1016c4dde295a5973
 
         GetSelection("2", "1");
 
