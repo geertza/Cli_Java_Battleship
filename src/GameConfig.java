@@ -1,5 +1,4 @@
 public class GameConfig {
-    private ConsoleHelper con = new ConsoleHelper();
     private Game game;
     private Player p1 = new HumanPlayer();
     private Player p2;
@@ -17,12 +16,12 @@ public class GameConfig {
         GetSelection("2", "1");
 
         System.out.println("                What is your name Player 1?");
-        String name = con.getInput("");
+        String name = ConsoleHelper.getInput("");
         p1.setName(name);
 
         if (p2 instanceof HumanPlayer) {
             System.out.println("                What is your name Player 2?");
-            String name2 = con.getInput("");
+            String name2 = ConsoleHelper.getInput("");
             p2.setName(name2);
         }
 
@@ -42,8 +41,8 @@ public class GameConfig {
 
     private void GetSelection(String option1, String option2) {
         while(true){
-            String selection = con.getInput("");
-            selection = selection.toLowerCase();
+            String selection = ConsoleHelper.getInput("");
+            selection = selection.toLowerCase().trim();
             if (selection.equals(option1)){
                 if (option1.equals("n")){
                     System.out.println("Starting a new game...");
