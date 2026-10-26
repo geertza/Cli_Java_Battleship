@@ -8,7 +8,7 @@ public class Grid {
     }
 
     public void display() {
-        char[] rowLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L'};
+        char[] rowLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         System.out.print("    1   2   3   4   5   6   7   8   9  10  ");
 
         for (int r = 0; r < 10; r++) {
