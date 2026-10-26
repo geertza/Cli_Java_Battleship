@@ -49,8 +49,7 @@ public class StartMenu {
     }                       
 
     public void openRules(){
-        rules.printRules();
-        display();
+        Rules.printRules();
     }
     
     public void openTutorial(){
