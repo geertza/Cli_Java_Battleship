@@ -1,11 +1,12 @@
 public class StartMenu {
-    ConsoleHelper con = new ConsoleHelper();
     Rules rules = new Rules();
     Tutorial tutorial = new Tutorial();
     String selection;
     Boolean deciding;
     public void display(){
         deciding=true;
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         System.out.println(" _______    ______   ________  ________  __        ________   ______   __    __  ______  _______    ");
         System.out.println("/       \\  /      \\ /        |/        |/  |      /        | /      \\ /  |  /  |/      |/       \\ ");
         System.out.println("$$$$$$$  |/$$$$$$  |$$$$$$$$/ $$$$$$$$/ $$ |      $$$$$$$$/ /$$$$$$  |$$ |  $$ |$$$$$$/ $$$$$$$  |  ");
@@ -19,21 +20,21 @@ public class StartMenu {
         System.out.println("                                            Start Menu");
         System.out.println("                              (P)lay - (R)ules - (T)utorial - (Q)uit");
         while(deciding){
-            selection = con.getInput("");
-            selection = selection.toLowerCase();
-            if (selection.equals("p")){
+            selection = ConsoleHelper.getInput("");
+            selection = selection.toLowerCase().trim();
+            if (selection.equals("p") || selection.equals("play")){
                 deciding= false;
                 play();
             }
-            else if (selection.equals("r")){
+            else if (selection.equals("r") || selection.equals("rules")){
                 deciding= false;
                 openRules();
             }
-            else if (selection.equals("t")){
+            else if (selection.equals("t") || selection.equals("tutorial")){
                 deciding= false;
                 openTutorial();
             }
-            else if (selection.equals("q")){
+            else if (selection.equals("q") || selection.equals("quit")){
                 deciding= false;
                 quit();
             }
@@ -43,18 +44,33 @@ public class StartMenu {
     public void play(){
         System.out.println("                Would you like to resume a previous save game or make a new game?");
         System.out.println("                                     (N)ew Game - (L)oad Game");
+        deciding=true;
+        while(deciding){
+            selection = ConsoleHelper.getInput("");
+            selection = selection.toLowerCase().trim();
+            if (selection.equals("n") || selection.equals("new") || selection.equals("new game|")){
+                deciding= false;
+                new GameConfig().start();
+            }
+            else if (selection.equals("l") || selection.equals("load") || selection.equals("load game")){
+                deciding= false;
+                new GameConfig().load();
+            }
+        }
     }
 
     public void openRules(){
         rules.display();
+        display();
     }
     
     public void openTutorial(){
         tutorial.start();
+        display();
     }
 
     public void quit(){
-        Game.quit();
+        App.quit();
     }
                                                       
 }
