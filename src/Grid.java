@@ -8,28 +8,35 @@ public class Grid {
     }
 
     public void display() {
+        String color = ColorConsole.RESET;
+        String symbol = "";
         char[] rowLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         System.out.print("    1   2   3   4   5   6   7   8   9  10  ");
 
         for (int r = 0; r < 10; r++) {
-            System.out.println("\n  +---+---+---+---+---+---+---+---+---+---+   ");
-            System.out.print(rowLetters[r] + " |");
+            System.out.println("\n  "+ColorConsole.BLUE+"+---+---+---+---+---+---+---+---+---+---+   ");
+            System.out.print(ColorConsole.RESET + rowLetters[r] + ColorConsole.BLUE+" |");
             for (int c = 0; c < 10; c++) {
                 if (cells[r][c].getState() == CellState.HIT) {
-                    System.out.print(" X |");
+                    color = ColorConsole.RED;
+                    symbol = "X";
                 }
                 else if (cells[r][c].getState() == CellState.MISS) {
-                    System.out.print(" O |");
+                    color = ColorConsole.RESET;
+                    symbol = "O";
                 }
                 else if (cells[r][c].getState() == CellState.OCCUPIED) {
-                    System.out.print(" # |");
+                    color = ColorConsole.GREY;
+                    symbol = "#";
                 }
                 else if (cells[r][c].getState() == CellState.EMPTY) {
-                    System.out.print("   |");
+                    color = ColorConsole.RESET;
+                    symbol =" ";
                 }
+                System.out.print(" "+color + symbol+ColorConsole.BLUE+" |");
             }
         }
-        System.out.println("\n  +---+---+---+---+---+---+---+---+---+---+   ");
+        System.out.println("\n  "+ColorConsole.BLUE+"+---+---+---+---+---+---+---+---+---+---+   "+ ColorConsole.RESET);
     }
 
     private void CreateCells() {
