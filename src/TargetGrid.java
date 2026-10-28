@@ -4,7 +4,7 @@ public class TargetGrid extends Grid {
         Cell cell = getCellAtCoordinate(sr.getShot());
         ShotOutcome outcome = sr.getOutcome();
         switch (outcome) {
-            case ShotOutcome.MISS:
+            case MISS:
                 cell.setState(CellState.MISS);
                 System.out.println("Miss at " + sr.getShot() + ".\n");
                 break;

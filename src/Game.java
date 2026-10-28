@@ -8,10 +8,10 @@ public class Game {
     }
 
     public void play() {
-        System.out.println("\nPlayer 1's Ocean Grid:");
-        p1.getOceanGrid().display();
-
         System.out.println("\nPlayer 1's Target Grid:");
         p1.getTargetGrid().display();
+
+        System.out.println("\nPlayer 1's Ocean Grid:");
+        p1.getOceanGrid().display();
     }
 }
