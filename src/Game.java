@@ -13,6 +13,14 @@ public class Game {
 
         System.out.println("\nPlayer 1's Ocean Grid:");
         p1.getOceanGrid().display();
+
+        
+
+        System.out.println("\nPlayer 2's Target Grid:");
+        p2.getTargetGrid().display();
+
+        System.out.println("\nPlayer 2's Ocean Grid:");
+        p2.getOceanGrid().display();
     }
 
     private void playAgain() {
