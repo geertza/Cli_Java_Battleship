@@ -33,4 +33,9 @@ public class ManualShipFactory extends ShipFactory {
             }
         }
     }
+
+    @Override
+    protected void displayErrorMessage(String reason) {
+        System.out.println(reason + "\n");
+    }
 }

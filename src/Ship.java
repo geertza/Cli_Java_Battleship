@@ -12,6 +12,14 @@ public class Ship {
         this.length = length;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
     public boolean isSunk() {
         return hits.size() == length;
     }
