@@ -27,4 +27,11 @@ public class Player {
     public ShipFactory getShipFactory() {
         return sf;
     }
+
+    public void placeShips() {
+        if (sf == null) {
+            throw new IllegalStateException("A ship factory must be set before placing ships.");
+        }
+        og.placeShips(sf.getShips());
+    }
 }

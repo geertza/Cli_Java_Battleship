@@ -7,7 +7,7 @@ public abstract class ShipFactory {
     protected List<Ship> ships = new ArrayList<Ship>();
     
 
-    protected List<Ship> getShips() {
+    public List<Ship> getShips() {
         List<Ship> initShips = List.of(
         new Ship("Carrier", 5),
         new Ship("Battleship", 4),

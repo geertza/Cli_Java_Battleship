@@ -15,6 +15,10 @@ public class GameConfig {
 
         GetSelection("2", "1");
 
+        if (p2 instanceof AIPlayer) {
+            p2.setShipFactory(new AutoShipFactory());
+        }
+
         System.out.println("                What is your name Player 1?");
         String name = ConsoleHelper.getInput("");
         p1.setName(name);
@@ -34,6 +38,9 @@ public class GameConfig {
             System.out.println("                                    (M)anual - (A)utomatic");
             GetSelection("a", "m"); // flip the order of options to make to get the selection for player 2
         }
+
+        p1.placeShips();
+        p2.placeShips();
 
         game = new Game(p1, p2);
         game.play();
