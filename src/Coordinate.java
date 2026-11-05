@@ -84,6 +84,14 @@ public class Coordinate {
         return column;
     }
 
+    public static Coordinate randomCoordinate(){
+        try {
+            return new Coordinate((int)(Math.random()*10.0),(int)(Math.random()*10.0));
+        } catch (Exception e){
+            return null;
+        }
+    }
+
     public List<Coordinate> coordsInDirection(int numOfCoords, Direction direction) throws Exception {
         List<Coordinate> coords = new ArrayList<Coordinate>();
 
