@@ -29,14 +29,9 @@ public class GameConfig {
             p2.setName(name2);
         }
 
-        System.out.printf("\n                 Hey %s, would you like to play with manual or automatic ship placement?\n", p1.getName());
-        System.out.println("                                    (M)anual - (A)utomatic");
-        GetSelection("m", "a");
-
+        configureShipPlacement(p1);
         if (p2 instanceof HumanPlayer) {
-            System.out.printf("\n                 Hey %s, would you like to play with manual or automatic ship placement?\n", p2.getName());
-            System.out.println("                                    (M)anual - (A)utomatic");
-            GetSelection("a", "m"); // flip the order of options to make to get the selection for player 2
+            configureShipPlacement(p2);
         }
 
         p1.placeShips();
@@ -44,6 +39,25 @@ public class GameConfig {
 
         game = new Game(p1, p2);
         game.play();
+    }
+
+    private void configureShipPlacement(Player player) {
+        while (true) {
+            System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
+                    player.getName());
+            System.out.println("                                    (M)anual - (A)utomatic");
+            String selection = ConsoleHelper.getInput("").toLowerCase().trim();
+
+            if (selection.equals("m") || selection.equals("manual")) {
+                player.setShipFactory(new ManualShipFactory());
+                return;
+            } else if (selection.equals("a") || selection.equals("automatic")) {
+                player.setShipFactory(new AutoShipFactory());
+                return;
+            }
+
+            System.out.println("Invalid selection. Please choose manual or automatic placement.");
+        }
     }
 
     private void GetSelection(String option1, String option2) {
@@ -56,12 +70,6 @@ public class GameConfig {
                 } else if (option1.equals("2")){
                     System.out.println("Starting a 2 player game...");
                     p2 = new HumanPlayer();
-                } else if (option1.equals("m")){
-                    System.out.println("Manual ship placement selected for player 1.");
-                    p1.setShipFactory(new ManualShipFactory());
-                } else if (option1.equals("a")){
-                    System.out.println("Automatic ship placement selected for player 1.");
-                    p2.setShipFactory(new AutoShipFactory());
                 }
                 break;
             }
@@ -72,12 +80,6 @@ public class GameConfig {
                 } else if (option2.equals("1")){
                     System.out.println("Starting a 1 player game...");
                     p2 = new AIPlayer();
-                } else if (option2.equals("a")){
-                    System.out.println("Automatic ship placement selected for player 1.");
-                    p1.setShipFactory(new AutoShipFactory());
-                } else if (option2.equals("m")){
-                    System.out.println("Manual ship placement selected for player 2.");
-                    p2.setShipFactory(new ManualShipFactory());
                 }
                 break;
             } else {
