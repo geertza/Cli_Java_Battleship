@@ -4,6 +4,7 @@ public class NextTurnBanner {
 
     public static void printOut() {
         // Standard ASCII banner font rendering for "NEXT PLAYER'S TURN"
+        ClearScreen.wipe();
         System.out.println(" _   _ _______  _______ ");
 System.out.println("| \\ | | ____\\ \\/ /_   _|");
 System.out.println("|  \\| |  _|  \\  /  | |  ");
