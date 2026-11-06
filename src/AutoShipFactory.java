@@ -12,6 +12,6 @@ public class AutoShipFactory extends ShipFactory {
 
     @Override
     protected void displayErrorMessage(String reason) {
-    System.out.println(reason);
+    // Dont display errors for automatic
 }
 }
