@@ -46,6 +46,7 @@ public class GameConfig {
 
     private void configureShipPlacement(Player player) {
         while (true) {
+            ClearScreen.wipe();
             System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
                     player.getName());
             System.out.println("                                    (M)anual - (A)utomatic");
