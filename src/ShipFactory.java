@@ -31,6 +31,7 @@ public abstract class ShipFactory {
                     ship.setCoordinates(coords);
                     existingCoords.addAll(coords);
                     ships.add(ship);
+                    onShipPlaced(ship);
                     break;
                 } catch (Exception e) {
                     displayErrorMessage(String.format("Ship went off of the grid, please enter a differant Coordinate or Direction for your %s.", ship.getName()));
@@ -47,6 +48,9 @@ public abstract class ShipFactory {
     protected abstract Direction getStartDirection(Ship ship);
 
     protected abstract void displayErrorMessage(String reason);
+    //hook to display new grid to.. only used in manual ship placement
+    protected void onShipPlaced(Ship ship) {};
+
 
     protected Boolean coordinatesOverlapExistingCoordinates(List<Coordinate> coords, Set<Coordinate> existingCoords) {
         for (Coordinate coord : coords) {

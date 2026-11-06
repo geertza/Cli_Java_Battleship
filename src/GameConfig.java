@@ -49,7 +49,8 @@ public class GameConfig {
             String selection = ConsoleHelper.getInput("").toLowerCase().trim();
 
             if (selection.equals("m") || selection.equals("manual")) {
-                player.setShipFactory(new ManualShipFactory());
+                player.getOceanGrid().display();
+                player.setShipFactory(new ManualShipFactory(player.getOceanGrid()));
                 return;
             } else if (selection.equals("a") || selection.equals("automatic")) {
                 player.setShipFactory(new AutoShipFactory());
