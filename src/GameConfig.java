@@ -9,7 +9,7 @@ public class GameConfig {
         System.out.println("                                     (N)ew Game - (L)oad Game");
 
         GetSelection("n", "l");
-
+        ClearScreen.wipe();
         System.out.println("                Would you like to play a 2 player game or 1 player game?");
         System.out.println("                                     (2) Player - (1) Player");
 
