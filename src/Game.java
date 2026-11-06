@@ -21,7 +21,8 @@ public class Game {
         System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Ocean Grid:");
         playerTakingTurn.getOceanGrid().display();
 
-        ConsoleHelper.getInput("\nPress Enter to switch to the next player...");
+        NextTurnBanner.printOut();
+        ConsoleHelper.getInput("");
         currentPlayer = currentPlayer == p1 ? p2 : p1;
         return playerTakingTurn;
     }
