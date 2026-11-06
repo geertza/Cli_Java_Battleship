@@ -33,13 +33,13 @@ public class GameConfig {
 
         ClearScreen.wipe();
         configureShipPlacement(p1);
+        p1.placeShips();
         if (p2 instanceof HumanPlayer) {
             configureShipPlacement(p2);
+            p2.placeShips();
         }
 
-        p1.placeShips();
-        p2.placeShips();
-
+        
         game = new Game(p1, p2);
         game.play();
     }

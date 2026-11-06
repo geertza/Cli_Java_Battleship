@@ -2,7 +2,7 @@ public class ManualShipFactory extends ShipFactory {
     @Override
     protected Coordinate getStartCoordinate(Ship ship) {
         while(true){
-            String selection = ConsoleHelper.getInput(String.format("Enter the start coordinate you want for your %s: ", ship.getName()));
+            String selection = ConsoleHelper.getInput(String.format("Enter the start coordinate you want for your %s (%s long) ",ship.getName(),ship.getLength()));
             try {
                 return new Coordinate(selection);
             } catch (Exception e) {
