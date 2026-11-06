@@ -1,5 +1,5 @@
 public class ClearScreen {
-
+    //class generated through google ai
     // Enhanced ANSI escape sequence that clears screen, clears scrollback buffer, and homes cursor
     private static final String HARD_WIPE = "\u001b[H\u001b[2J\u001b[3J";
     private static boolean isInitialized = false;
