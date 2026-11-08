@@ -50,16 +50,16 @@ public class Game {
         while(true){
             String selection = ConsoleHelper.getInput("");
             selection = selection.toLowerCase().trim();
-            if (selection.equals('p')){
+            if (selection.equals("p")){
                 System.out.println("Starting another game...");
                 play();
                 break;
             }
-            else if (selection.equals('n')){
+            else if (selection.equals("n")){
                 System.out.println("Starting a new game...");
                 new GameConfig().start();
                 break;
-            } else if (selection.equals('b')){
+            } else if (selection.equals("b")){
                 System.out.println("Going back to start menu...");
                 new StartMenu().display();
                 break;
