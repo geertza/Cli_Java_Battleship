@@ -19,36 +19,43 @@ public class GameConfig {
             p2.setShipFactory(new AutoShipFactory());
         }
 
+        ClearScreen.wipe();
         System.out.println("                What is your name Player 1?");
         String name = ConsoleHelper.getInput("");
         p1.setName(name);
 
+        ClearScreen.wipe();
         if (p2 instanceof HumanPlayer) {
             System.out.println("                What is your name Player 2?");
             String name2 = ConsoleHelper.getInput("");
             p2.setName(name2);
         }
 
+        ClearScreen.wipe();
         configureShipPlacement(p1);
+        p1.placeShips();
         if (p2 instanceof HumanPlayer) {
             configureShipPlacement(p2);
+            p2.placeShips();
         }
 
-        p1.placeShips();
-        p2.placeShips();
-
+        
         game = new Game(p1, p2);
         game.play();
     }
 
     private void configureShipPlacement(Player player) {
         while (true) {
+            ClearScreen.wipe();
             System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
                     player.getName());
             System.out.println("                                    (M)anual - (A)utomatic");
             String selection = ConsoleHelper.getInput("").toLowerCase().trim();
+            ClearScreen.wipe();
 
             if (selection.equals("m") || selection.equals("manual")) {
+                System.out.println("Time to place your Ships!!");
+                System.out.println("Make sure the other player can't see where you are placing your screen!!");
                 player.getOceanGrid().display();
                 player.setShipFactory(new ManualShipFactory(player.getOceanGrid()));
                 return;

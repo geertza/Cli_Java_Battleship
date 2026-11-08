@@ -20,7 +20,7 @@ public class Game {
 
         System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Ocean Grid:");
         playerTakingTurn.getOceanGrid().display();
-
+        ConsoleHelper.getInput("hit enter to simulate turn!!!");
         NextTurnBanner.printOut();
         ConsoleHelper.getInput("");
         currentPlayer = currentPlayer == p1 ? p2 : p1;
