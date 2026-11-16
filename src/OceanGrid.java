@@ -31,4 +31,8 @@ public class OceanGrid extends Grid {
             }
         }
     }
+
+    public List<Ship> getShips() {
+        return ships;
+    }
 }

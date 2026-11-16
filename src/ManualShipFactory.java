@@ -1,6 +1,9 @@
-public class ManualShipFactory extends ShipFactory {   
+public class ManualShipFactory extends ShipFactory {  
+    private final OceanGrid displayGrid = new OceanGrid();
+    
     @Override
     protected Coordinate getStartCoordinate(Ship ship) {
+        displayGrid.display();
         while(true){
             String selection = ConsoleHelper.getInput(String.format("Enter the start coordinate you want for your %s (%s long) ",ship.getName(),ship.getLength()));
             try {
@@ -38,17 +41,10 @@ public class ManualShipFactory extends ShipFactory {
     protected void displayErrorMessage(String reason) {
         System.out.println(reason + "\n");
     }
-    private final OceanGrid oceanGrid;
-
-    public ManualShipFactory(OceanGrid oceanGrid) {
-        this.oceanGrid = oceanGrid;
-    }
 
     @Override
     protected void onShipPlaced(Ship ship) {
-        oceanGrid.placeShips(ships);
-        oceanGrid.display();
+        displayGrid.placeShips(ships);
     }
-
 
 }
