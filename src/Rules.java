@@ -58,7 +58,7 @@ public class Rules {
         System.out.println("   The first player to completely sink all 5 enemy ships wins!");
         System.out.println();
         System.out.println(border);
-        System.out.println("\n\nPlease press enter to return to start menu.");
+        System.out.println("\n\nPlease press enter to return.");
         ConsoleHelper.getInput("");
     }
 
