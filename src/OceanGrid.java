@@ -44,4 +44,8 @@ public class OceanGrid extends Grid {
         }
         return true;
     }
+
+    public List<Ship> getShips() {
+        return ships;
+    }
 }

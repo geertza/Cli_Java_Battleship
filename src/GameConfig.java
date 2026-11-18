@@ -1,7 +1,10 @@
 public class GameConfig {
     private Game game;
-    private Player p1 = new HumanPlayer();
+    private Player p1;
     private Player p2;
+    private boolean isTwoPlayerGame;
+    private String name1;
+    private String name2;
 
     public void start() {
 
@@ -15,27 +18,21 @@ public class GameConfig {
 
         GetSelection("2", "1");
 
-        if (p2 instanceof AIPlayer) {
-            p2.setShipFactory(new AutoShipFactory());
-        }
-
         ClearScreen.wipe();
         System.out.println("                What is your name Player 1?");
-        String name = ConsoleHelper.getInput("");
-        p1.setName(name);
+        name1 = ConsoleHelper.getInput("");
 
         ClearScreen.wipe();
-        if (p2 instanceof HumanPlayer) {
+        if (isTwoPlayerGame) {
             System.out.println("                What is your name Player 2?");
-            String name2 = ConsoleHelper.getInput("");
-            p2.setName(name2);
+            name2 = ConsoleHelper.getInput("");
         }
 
         ClearScreen.wipe();
-        configureShipPlacement(p1);
+        configureShipPlacement(p1, name1);
         p1.placeShips();
-        if (p2 instanceof HumanPlayer) {
-            configureShipPlacement(p2);
+        if (isTwoPlayerGame) {
+            configureShipPlacement(p2, name2);
             p2.placeShips();
         }
 
@@ -44,11 +41,11 @@ public class GameConfig {
         game.play();
     }
 
-    private void configureShipPlacement(Player player) {
+    private void configureShipPlacement(Player player, String name) {
         while (true) {
             ClearScreen.wipe();
             System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
-                    player.getName());
+                    name);
             System.out.println("                                    (M)anual - (A)utomatic");
             String selection = ConsoleHelper.getInput("").toLowerCase().trim();
             ClearScreen.wipe();
@@ -56,11 +53,10 @@ public class GameConfig {
             if (selection.equals("m") || selection.equals("manual")) {
                 System.out.println("Time to place your Ships!!");
                 System.out.println("Make sure the other player can't see where you are placing your screen!!");
-                player.getOceanGrid().display();
-                player.setShipFactory(new ManualShipFactory(player.getOceanGrid()));
+                player = new HumanPlayer(name, new ManualShipFactory());
                 return;
             } else if (selection.equals("a") || selection.equals("automatic")) {
-                player.setShipFactory(new AutoShipFactory());
+                player = new HumanPlayer(name, new AutoShipFactory());
                 return;
             }
 
@@ -77,7 +73,7 @@ public class GameConfig {
                     System.out.println("Starting a new game...");
                 } else if (option1.equals("2")){
                     System.out.println("Starting a 2 player game...");
-                    p2 = new HumanPlayer();
+                    isTwoPlayerGame = true;
                 }
                 break;
             }
@@ -87,7 +83,7 @@ public class GameConfig {
                     continue;
                 } else if (option2.equals("1")){
                     System.out.println("Starting a 1 player game...");
-                    p2 = new AIPlayer();
+                    isTwoPlayerGame = false;
                 }
                 break;
             } else {
