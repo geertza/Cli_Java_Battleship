@@ -29,6 +29,11 @@ public class HumanPlayer implements Player {
     }
 
     public Coordinate takeShot() {
+        System.out.println("\nTarget Grid:");
+        tg.display();
+        System.out.println("\nOcean Grid:");
+        og.display();
+
         while (true) {
             try {
                 String coordStr = ConsoleHelper.getInput("\nEnter the coordinate you want to shoot at: ");

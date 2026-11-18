@@ -2,39 +2,57 @@ public class Game {
     Player p1;
     Player p2;
     private Player currentPlayer;
+    private Player otherPlayer;
+    ShotResult result;
 
     public Game(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
         this.currentPlayer = p1;
-    }
-
-    public Player takeTurn() {
-        Player playerTakingTurn = currentPlayer;
-
-        System.out.print("\033[2J");
-        System.out.flush();
-
-        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Target Grid:");
-        playerTakingTurn.getTargetGrid().display();
-
-        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Ocean Grid:");
-        playerTakingTurn.getOceanGrid().display();
-        String selection = ConsoleHelper.getInput("Press enter to simulate turn or P to pause: ");
-        if (selection != null
-                && (selection.trim().equalsIgnoreCase("p") || selection.trim().equalsIgnoreCase("pause"))) {
-            openMenu();
-        }
-        NextTurnBanner.printOut();
-        ConsoleHelper.getInput("");
-        currentPlayer = currentPlayer == p1 ? p2 : p1;
-        return playerTakingTurn;
+        this.otherPlayer = p2;
     }
 
     public void play() {
-        while (true) {
-            takeTurn();
+        System.out.printf("\nHey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.\n", p1.getName());
+        p1.placeShips();
+        if (p2 instanceof HumanPlayer) {
+            System.out.printf("Hey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.", p2.getName());
         }
+        p2.placeShips();
+        while (true) {
+            System.out.print("\033[2J");
+            System.out.flush();
+
+            if (currentPlayer instanceof HumanPlayer) {
+                if (result != null) {
+                    displayPreviousTurnOutcome(result);
+                }
+                System.out.printf("It's now %s's Turn!\n", currentPlayer.getName());
+
+                String selection = ConsoleHelper.getInput("Press enter to take a shot or P to pause: ");
+                if (selection != null
+                        && (selection.trim().equalsIgnoreCase("p") || selection.trim().equalsIgnoreCase("pause"))) {
+                    openMenu();
+                }
+            }
+
+            Coordinate shot = currentPlayer.takeShot();
+            result = otherPlayer.receiveShot(shot);
+            currentPlayer.receiveShotResult(result);
+
+            ConsoleHelper.getInput("Press enter to switch players: ");
+            
+            if (otherPlayer.shipsAreSunk()) {
+                System.out.printf("Congratulations %s!!! You sunk all of the opponet's ships.");
+                break;
+            }
+            
+            NextTurnBanner.printOut();
+            ConsoleHelper.getInput("");
+            currentPlayer = currentPlayer == p1 ? p2 : p1;
+            otherPlayer = otherPlayer == p1 ? p2 : p1;
+        }
+        playAgain();
     }
 
     private String getPlayerLabel(Player player) {
@@ -106,6 +124,21 @@ public class Game {
             } else {
                 System.out.println("Invalid selection. Please input either P, N, or B.");
             }
+        }
+    }
+
+    private void displayPreviousTurnOutcome(ShotResult sr) {
+        ShotOutcome outcome = sr.getOutcome();
+        switch (outcome) {
+            case ShotOutcome.MISS:
+                System.out.println("Your opponent shot a Miss at " + sr.getShot() + ".\n");
+                break;
+            case HIT:
+                System.out.println("Your opponent scored a Hit at " + sr.getShot() + "!\n");
+                break;
+            case SUNK:
+                System.out.println("Your opponent sunk your " + sr.getShipName() + " at " + sr.getShot() + "!\n");
+                break;
         }
     }
 }
