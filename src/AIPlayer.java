@@ -1,6 +1,4 @@
 public class AIPlayer implements Player {
-    
-
     public String getName() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getName'");

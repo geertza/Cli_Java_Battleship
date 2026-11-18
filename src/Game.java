@@ -23,44 +23,6 @@ public class Game {
             System.out.print("\033[2J");
             System.out.flush();
 
-        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Target Grid:");
-        playerTakingTurn.getTargetGrid().display();
-
-        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Ocean Grid:");
-        playerTakingTurn.getOceanGrid().display();
-        String selection = ConsoleHelper.getInput("Press enter to simulate turn or P to pause: ");
-        if (selection != null
-                && (selection.trim().equalsIgnoreCase("p") || selection.trim().equalsIgnoreCase("pause"))) {
-            openMenu();
-        }
-        NextTurnBanner.printOut();
-        ConsoleHelper.getInput("");
-        currentPlayer = currentPlayer == p1 ? p2 : p1;
-        return playerTakingTurn;
-    }
-
-    public void play() {
-        while (true) {
-            takeTurn();
-            if (p1.getOceanGrid().allShipsSunk()) {
-                displayVictoryScreen(p2);
-                return;
-            }
-            if (p2.getOceanGrid().allShipsSunk()) {
-                displayVictoryScreen(p1);
-                return;
-            }
-        }
-    }
-
-    private void displayVictoryScreen(Player winner) {
-        ClearScreen.wipe();
-        System.out.println("========================================");
-        System.out.println("              VICTORY!");
-        System.out.println("       " + getPlayerLabel(winner) + " wins!");
-        System.out.println("========================================");
-        ConsoleHelper.getInput("Press enter to choose to play again or quit!");
-        playAgain();
             if (currentPlayer instanceof HumanPlayer) {
                 if (result != null) {
                     displayPreviousTurnOutcome(result);
@@ -81,8 +43,7 @@ public class Game {
             ConsoleHelper.getInput("Press enter to switch players: ");
             
             if (otherPlayer.shipsAreSunk()) {
-                System.out.printf("Congratulations %s!!! You sunk all of the opponet's ships.");
-                break;
+                displayVictoryScreen(currentPlayer);
             }
             
             NextTurnBanner.printOut();
@@ -90,7 +51,18 @@ public class Game {
             currentPlayer = currentPlayer == p1 ? p2 : p1;
             otherPlayer = otherPlayer == p1 ? p2 : p1;
         }
+    }
+
+
+    private void displayVictoryScreen(Player winner) {
+        ClearScreen.wipe();
+        System.out.println("========================================");
+        System.out.println("              VICTORY!");
+        System.out.println("       " + getPlayerLabel(winner) + " wins!");
+        System.out.println("========================================");
+        ConsoleHelper.getInput("Press enter to choose to play again or quit!");
         playAgain();
+
     }
 
     private String getPlayerLabel(Player player) {

@@ -29,39 +29,22 @@ public class GameConfig {
         }
 
         ClearScreen.wipe();
-        configureShipPlacement(p1, name1);
-        p1.placeShips();
+        System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
+                    name1);
+        System.out.println("                                    (M)anual - (A)utomatic");
+        GetSelection("m", "a");
+
         if (isTwoPlayerGame) {
-            configureShipPlacement(p2, name2);
-            p2.placeShips();
-        }
-
-        
-        game = new Game(p1, p2);
-        game.play();
-    }
-
-    private void configureShipPlacement(Player player, String name) {
-        while (true) {
             ClearScreen.wipe();
             System.out.printf("\n                 Hey %s, would you like to place ships manually or automatically?\n",
-                    name);
+                    name2);
             System.out.println("                                    (M)anual - (A)utomatic");
-            String selection = ConsoleHelper.getInput("").toLowerCase().trim();
-            ClearScreen.wipe();
-
-            if (selection.equals("m") || selection.equals("manual")) {
-                System.out.println("Time to place your Ships!!");
-                System.out.println("Make sure the other player can't see where you are placing your screen!!");
-                player = new HumanPlayer(name, new ManualShipFactory());
-                return;
-            } else if (selection.equals("a") || selection.equals("automatic")) {
-                player = new HumanPlayer(name, new AutoShipFactory());
-                return;
-            }
-
-            System.out.println("Invalid selection. Please choose manual or automatic placement.");
+            GetSelection("a", "m");
+        } else {
+            p2 = new AIPlayer(); 
         }
+        game = new Game(p1, p2);
+        game.play();
     }
 
     private void GetSelection(String option1, String option2) {
@@ -70,10 +53,12 @@ public class GameConfig {
             selection = selection.toLowerCase().trim();
             if (selection.equals(option1)){
                 if (option1.equals("n")){
-                    System.out.println("Starting a new game...");
                 } else if (option1.equals("2")){
-                    System.out.println("Starting a 2 player game...");
                     isTwoPlayerGame = true;
+                } else if (option1.equals("m")){
+                    p1 = new HumanPlayer(name1, new ManualShipFactory());
+                } else if (option1.equals("a")){
+                    p2 = new HumanPlayer(name2, new AutoShipFactory());
                 }
                 break;
             }
@@ -82,8 +67,11 @@ public class GameConfig {
                     System.out.println("This is where a previous save game would be loaded.");
                     continue;
                 } else if (option2.equals("1")){
-                    System.out.println("Starting a 1 player game...");
                     isTwoPlayerGame = false;
+                } else if (option2.equals("m")){
+                    p2 = new HumanPlayer(name2, new ManualShipFactory());
+                } else if (option2.equals("a")){
+                    p1 = new HumanPlayer(name1, new AutoShipFactory());
                 }
                 break;
             } else {
