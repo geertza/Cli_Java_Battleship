@@ -23,6 +23,44 @@ public class Game {
             System.out.print("\033[2J");
             System.out.flush();
 
+        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Target Grid:");
+        playerTakingTurn.getTargetGrid().display();
+
+        System.out.println("\n" + getPlayerLabel(playerTakingTurn) + "'s Ocean Grid:");
+        playerTakingTurn.getOceanGrid().display();
+        String selection = ConsoleHelper.getInput("Press enter to simulate turn or P to pause: ");
+        if (selection != null
+                && (selection.trim().equalsIgnoreCase("p") || selection.trim().equalsIgnoreCase("pause"))) {
+            openMenu();
+        }
+        NextTurnBanner.printOut();
+        ConsoleHelper.getInput("");
+        currentPlayer = currentPlayer == p1 ? p2 : p1;
+        return playerTakingTurn;
+    }
+
+    public void play() {
+        while (true) {
+            takeTurn();
+            if (p1.getOceanGrid().allShipsSunk()) {
+                displayVictoryScreen(p2);
+                return;
+            }
+            if (p2.getOceanGrid().allShipsSunk()) {
+                displayVictoryScreen(p1);
+                return;
+            }
+        }
+    }
+
+    private void displayVictoryScreen(Player winner) {
+        ClearScreen.wipe();
+        System.out.println("========================================");
+        System.out.println("              VICTORY!");
+        System.out.println("       " + getPlayerLabel(winner) + " wins!");
+        System.out.println("========================================");
+        ConsoleHelper.getInput("Press enter to choose to play again or quit!");
+        playAgain();
             if (currentPlayer instanceof HumanPlayer) {
                 if (result != null) {
                     displayPreviousTurnOutcome(result);
@@ -69,7 +107,7 @@ public class Game {
         while (true) {
             ClearScreen.wipe();
             System.out.println("The game is now paused. Press enter to resume or choose another option.");
-            System.out.println("             (S)ettings - Sa(V)e - (R)ules - (Q)uit");
+            System.out.println("             (O)ptions - (S)ave - (R)ules - (Q)uit");
 
             String input = ConsoleHelper.getInput("");
             if (input == null) {
@@ -78,10 +116,10 @@ public class Game {
             String selection = input.trim().toLowerCase();
             if (selection.isEmpty() || selection.equals("p") || selection.equals("resume")) {
                 return;
-            } else if (selection.equals("s") || selection.equals("settings")) {
-                System.out.println("Settings will be available soon.");
+            } else if (selection.equals("o") || selection.equals("options")) {
+                System.out.println("Options will be available soon.");
                 ConsoleHelper.getInput("Press enter to return to the pause menu.");
-            } else if (selection.equals("v") || selection.equals("save")) {
+            } else if (selection.equals("s") || selection.equals("save")) {
                 System.out.println("This is a placeholder. Saving is not available yet. Your game has not been saved.");
                 ConsoleHelper.getInput("Press enter to return to the pause menu.");
             } else if (selection.equals("r") || selection.equals("rules")) {
@@ -95,7 +133,7 @@ public class Game {
                 }
                 return;
             } else {
-                System.out.println("Invalid selection. Press enter to resume, or choose R or Q.");
+                System.out.println("Invalid selection. Press enter to resume, or choose O, S, R, or Q.");
                 ConsoleHelper.getInput("");
             }
         }

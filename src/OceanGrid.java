@@ -32,6 +32,19 @@ public class OceanGrid extends Grid {
         }
     }
 
+    public boolean allShipsSunk() {
+        if (ships == null || ships.isEmpty()) {
+            return false;
+        }
+
+        for (Ship ship : ships) {
+            if (!ship.isSunk()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<Ship> getShips() {
         return ships;
     }
