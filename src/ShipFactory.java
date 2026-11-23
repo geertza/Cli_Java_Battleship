@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class ShipFactory {
-    protected List<Ship> ships = new ArrayList<Ship>();
+    protected List<Ship> ships = new ArrayList<>();
     
 
     public List<Ship> getShips() {
@@ -16,7 +16,7 @@ public abstract class ShipFactory {
         new Ship("Destroyer", 2)
         );
 
-        Set<Coordinate> existingCoords = new HashSet<Coordinate>();
+        Set<Coordinate> existingCoords = new HashSet<>();
 
         for (Ship ship : initShips) {
             while (true) {

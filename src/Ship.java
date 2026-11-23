@@ -1,11 +1,11 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 public class Ship {
 
     private String name;
     private int length;
     private List<Coordinate> coordinates;
-    private List<Coordinate> hits = new ArrayList<Coordinate>();
+    private List<Coordinate> hits = new ArrayList<>();
 
     public Ship(String name, int length) {
         this.name = name;

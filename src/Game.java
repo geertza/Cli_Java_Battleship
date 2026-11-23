@@ -1,9 +1,9 @@
 public class Game {
-    Player p1;
-    Player p2;
+    private Player p1;
+    private Player p2;
     private Player currentPlayer;
     private Player otherPlayer;
-    ShotResult result;
+    private ShotResult result;
 
     public Game(Player p1, Player p2) {
         this.p1 = p1;
@@ -16,12 +16,11 @@ public class Game {
         System.out.printf("\nHey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.\n", p1.getName());
         p1.placeShips();
         if (p2 instanceof HumanPlayer) {
-            System.out.printf("Hey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.", p2.getName());
+            System.out.printf("Hey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.\n", p2.getName());
         }
         p2.placeShips();
         while (true) {
-            System.out.print("\033[2J");
-            System.out.flush();
+            ClearScreen.wipe();
 
             if (currentPlayer instanceof HumanPlayer) {
                 if (result != null) {
