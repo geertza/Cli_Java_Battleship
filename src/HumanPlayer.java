@@ -1,8 +1,10 @@
+import java.util.List;
 public class HumanPlayer implements Player {
     private String name;
     private TargetGrid tg = new TargetGrid();
     private OceanGrid og = new OceanGrid();
     private ShipFactory sf;
+
 
     public HumanPlayer(String name, ShipFactory sf) {
         this.name = name;
@@ -50,7 +52,11 @@ public class HumanPlayer implements Player {
     }
 
     public boolean shipsAreSunk() {
-        for (Ship ship : og.getShips()) {
+        List<Ship> ships = og.getShips();
+        if (ships == null || ships.isEmpty()) {
+            return false;
+        }
+        for (Ship ship : ships) {
             if (ship.isSunk()) {
                 continue;
             } else {return false;}
