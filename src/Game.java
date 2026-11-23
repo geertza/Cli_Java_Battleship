@@ -41,7 +41,7 @@ public class Game {
             result = otherPlayer.receiveShot(shot);
             currentPlayer.receiveShotResult(result);
 
-            if (!isSinglePlayerGame) {
+            if (currentPlayer instanceof HumanPlayer) {
                 ConsoleHelper.getInput("Press enter to switch players: ");
             }
             
