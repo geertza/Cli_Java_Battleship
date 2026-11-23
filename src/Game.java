@@ -33,6 +33,7 @@ public class Game {
                 if (selection != null
                         && (selection.trim().equalsIgnoreCase("p") || selection.trim().equalsIgnoreCase("pause"))) {
                     openMenu();
+                    continue;
                 }
             }
 
