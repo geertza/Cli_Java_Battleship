@@ -13,6 +13,7 @@ public class Game {
     }
 
     public void play() {
+        boolean isSinglePlayerGame = p1 instanceof AIPlayer || p2 instanceof AIPlayer;
         System.out.printf("\nHey %s! It's time to place your ships!!! Make sure the other player isn't looking at your screen while you do this.\n", p1.getName());
         p1.placeShips();
         if (p2 instanceof HumanPlayer) {
@@ -41,14 +42,18 @@ public class Game {
             result = otherPlayer.receiveShot(shot);
             currentPlayer.receiveShotResult(result);
 
-            ConsoleHelper.getInput("Press enter to switch players: ");
+            if (!isSinglePlayerGame) {
+                ConsoleHelper.getInput("Press enter to switch players: ");
+            }
             
             if (otherPlayer.shipsAreSunk()) {
                 displayVictoryScreen(currentPlayer);
             }
             
-            NextTurnBanner.printOut();
-            ConsoleHelper.getInput("");
+            if (!isSinglePlayerGame) {
+                NextTurnBanner.printOut();
+                ConsoleHelper.getInput("");
+            }
             currentPlayer = currentPlayer == p1 ? p2 : p1;
             otherPlayer = otherPlayer == p1 ? p2 : p1;
         }
