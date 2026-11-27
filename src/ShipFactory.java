@@ -6,15 +6,18 @@ import java.util.Set;
 public abstract class ShipFactory {
     protected List<Ship> ships = new ArrayList<>();
     
+    public static List<Ship> createFleet() {
+        return List.of(
+            new Ship("Carrier", 5),
+            new Ship("Battleship", 4),
+            new Ship("Cruiser", 3),
+            new Ship("Submarine", 3),
+            new Ship("Destroyer", 2)
+        );
+    }
 
     public List<Ship> getShips() {
-        List<Ship> initShips = List.of(
-        new Ship("Carrier", 5),
-        new Ship("Battleship", 4),
-        new Ship("Cruiser", 3),
-        new Ship("Submarine", 3),
-        new Ship("Destroyer", 2)
-        );
+        List<Ship> initShips = createFleet();
 
         Set<Coordinate> existingCoords = new HashSet<>();
 
